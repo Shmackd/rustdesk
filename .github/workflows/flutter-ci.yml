@@ -16,6 +16,8 @@ on:
       - "res/**"
       - "appimage/**"
       - "flatpak/**"
+permissions:
+  contents: write
 
 jobs:
   run-ci:
