@@ -1140,7 +1140,7 @@ class _FileManagerViewState extends State<FileManagerView> {
               entry.isFile ? readableFileSize(entry.size.toDouble()) : "";
           final lastModifiedStr = entry.isDrive
               ? " "
-              : "${entry.lastModified().toString().replaceAll(".000", "")}   ";
+              : "${(() { final dt = entry.lastModified(); final h = dt.hour % 12 == 0 ? 12 : dt.hour % 12; final p = dt.hour >= 12 ? 'PM' : 'AM'; return '${dt.year.toString().padLeft(4, '0')}-${dt.month.toString().padLeft(2, '0')}-${dt.day.toString().padLeft(2, '0')} ${h.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}:${dt.second.toString().padLeft(2, '0')} $p'; })()}   ";
           var secondaryPosition = RelativeRect.fromLTRB(0, 0, 0, 0);
           onTap() {
             _keyboardNode.requestFocus();
