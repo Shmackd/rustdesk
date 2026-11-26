@@ -74,7 +74,7 @@ jobs:
 
   publish-release:
     needs: [check-and-sync, build]
-    if: !cancelled() && needs.check-and-sync.outputs.should_build == 'true' && needs.build.result == 'success'
+    if: ${{ !cancelled() && needs.check-and-sync.outputs.should_build == 'true' && needs.build.result == 'success' }}
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifacts
