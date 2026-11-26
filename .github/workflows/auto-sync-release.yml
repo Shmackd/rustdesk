@@ -74,7 +74,7 @@ jobs:
 
   publish-release:
     needs: [check-and-sync, build]
-    if: needs.check-and-sync.outputs.should_build == 'true' && needs.build.result == 'success'
+    if: !cancelled() && needs.check-and-sync.outputs.should_build == 'true' && needs.build.result == 'success'
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifacts
@@ -94,7 +94,7 @@ jobs:
             -iname '*x86_64*.msi' -o \
             -iname '*x64*.exe' -o \
             -iname '*x64*.msi' \
-          \) -exec cp -v {} release-assets/ \;
+          \) ! -iname 'rustdesk-template*' -exec cp -v {} release-assets/ \;
           ls -la release-assets/
 
       - name: Create or update GitHub Release
